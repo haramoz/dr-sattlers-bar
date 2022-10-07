@@ -16,6 +16,8 @@ This is the web interface. Following APIs are available:
 6) Metrics (admin)
 7) Notifications (admin)
 
+Error handling
+
 ### Routes
 bar, metrics, notifications
 
@@ -45,6 +47,7 @@ https://github.com/topics/actor-model
 
 docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:19.0.2 start-dev
 
+https://www.keycloak.org/getting-started/getting-started-docker
 
 https://blog.logrocket.com/implement-keycloak-authentication-react/
 
@@ -58,6 +61,9 @@ TO DO:
 Login page and oauth
 Routing
 roll based access to tabs
+
+The example that i was following turns out to be a bust. New approach, from the udemy course will implement
+React Routing and /bar /metrics /notifications
 
 
 
