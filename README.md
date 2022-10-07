@@ -65,6 +65,8 @@ roll based access to tabs
 The example that i was following turns out to be a bust. New approach, from the udemy course will implement
 React Routing and /bar /metrics /notifications
 
+It seems most of the keycloak react library on top of router-dom are based on the version v5. So downgraded to react 16.14.0 and react-router 5.2.0
+
 
 
 
