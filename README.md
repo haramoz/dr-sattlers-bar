@@ -57,6 +57,8 @@ https://www.talkingquickly.co.uk/keycloak-and-openldap-on-kubernetes
 
 https://cagline.medium.com/authenticate-and-authorize-react-routes-component-with-keycloak-666e85662636
 
+https://github.com/v-ladynev/keycloak-nodejs-example
+
 TO DO:
 Login page and oauth
 Routing
@@ -67,6 +69,9 @@ React Routing and /bar /metrics /notifications
 
 It seems most of the keycloak react library on top of router-dom are based on the version v5. So downgraded to react 16.14.0 and react-router 5.2.0
 
+2022-10-08 01:05:02,388 WARN  [org.keycloak.events] (executor-thread-182) type=CODE_TO_TOKEN_ERROR, realmId=b1d2aa06-1159-4ef2-9944-87c269715c03, clientId=sattlers, userId=null, ipAddress=172.17.0.1, error=invalid_client_credentials, grant_type=authorization_code
+
+this is the error, i might need to focus on microservices instead
 
 
 
