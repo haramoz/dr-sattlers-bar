@@ -73,6 +73,9 @@ It seems most of the keycloak react library on top of router-dom are based on th
 
 this is the error, i might need to focus on microservices instead
 
+TO do (11 Oct)
+craeted new branch for trying different route than keycloak
+
 
 
 
