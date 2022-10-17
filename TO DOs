@@ -1,0 +1,37 @@
+Next goal:
+
+Microservices spring boot 
+
+Waiter
+
+POST takeOrders
+GET menu
+POST payment
+GET estimatedTimeToServeFood
+GET suggestFood
+
+GET serveFood
+
+Events:
+
+Produces:
+
+Order placed
+Order served
+Payment initiated
+
+
+Consumes:
+
+Order Ready
+payment success
+payment failed
+
+Namespace:
+com.dr.sattlers.bar.employee.waiter
+
+Refs:
+https://techdozo.dev/restful-microservices-with-spring-boot-and-kubernetes/
+https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
+
+after this is available, will write a node js backend to interact with this one, I think should a separate repository.
