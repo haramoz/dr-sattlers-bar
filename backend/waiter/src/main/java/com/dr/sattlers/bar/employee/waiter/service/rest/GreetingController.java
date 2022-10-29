@@ -49,7 +49,7 @@ public class GreetingController {
     public boolean takeOrders(
             @RequestParam(value = "table", defaultValue = "1")
             String tableId) {
-        //TODO process the order with database
+        //TODO process the order with database & Event
         return true;
     }
 
