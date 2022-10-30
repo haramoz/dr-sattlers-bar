@@ -30,6 +30,18 @@ var paymentsRecieved = []payment{
 	//{TableID: "3", Amount: 39.99, PaymentMethod: "Cash"},
 }
 
+// @title           Dr sattler Bar Payment API
+// @version         1.0
+// @description     This is a billing/payment API.
+// @termsOfService  http://swagger.io/terms/
+
+// @contact.name   Arka Mallick
+// @contact.email  ar.mallick@reply.de
+
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host      localhost:8080
 func main() {
 	router := gin.Default()
 	router.GET("/bill/:tableid", getBill)
@@ -40,12 +52,24 @@ func main() {
 	router.Run("localhost:8080")
 }
 
-// getPayments responds with the list of all payments Recieved as JSON.
+// getPayments godoc
+// @Description getPayments responds with the list of all payments Recieved as JSON.
+// @Accept json
+// @Produce json
+// @Success 200 {array} payment
+// @Router /payments [get]
 func getPayments(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, paymentsRecieved)
 }
 
-// postProcessPayment adds an payment from JSON received in the request body.
+// postProcessPayment godoc
+// @Description postProcessPayment adds an payment from JSON received in the request body.
+// @Accept json
+// @Produce json
+// @Success 201 object payment
+// @Failure 404 string error
+// @Router /payment [post]
+// @Param payment body payment true "payment details"
 func postProcessPayment(c *gin.Context) {
 	var newPayment payment
 
@@ -89,7 +113,14 @@ func RemoveIndex(s []bill, index int) []bill {
 	return append(s[:index], s[index+1:]...)
 }
 
-// postPrepareBill adds an payment from JSON received in the request body.
+// postPrepareBill godoc
+// @Description postPrepareBill adds an bill from JSON received in the request body.
+// @Accept json
+// @Produce json
+// @Success 201 string bill
+// @Failure 404 string error
+// @Param bill body bill true "New bill details"
+// @Router /newbill [post]
 func postPrepareBill(c *gin.Context) {
 	var newBill bill
 
@@ -99,14 +130,20 @@ func postPrepareBill(c *gin.Context) {
 		return
 	}
 
-	// Add the new payment to the slice.
+	// Add the new bill to the slice.
 	bills = append(bills, newBill)
 	// TODO delete entry from bills struct
 	c.IndentedJSON(http.StatusCreated, newBill)
 }
 
-// getBill locates the bill amount whose ID value matches the id
+// getBill godoc
+// @Description getBill locates the bill amount whose ID value matches the id
 // parameter sent by the client, then returns that bill as a response.
+// @Accept json
+// @Produce json
+// @Param tableid query string true "table id"
+// @Success 200 {array} bill
+// @Router /bill [get]
 func getBill(c *gin.Context) {
 	id := c.Param("tableid")
 

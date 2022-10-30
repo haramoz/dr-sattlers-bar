@@ -1,0 +1,114 @@
+definitions:
+  main.bill:
+    properties:
+      amount:
+        type: number
+      tableid:
+        type: string
+    type: object
+  main.payment:
+    properties:
+      amount:
+        type: number
+      method:
+        type: string
+      tableid:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: ar.mallick@reply.de
+    name: Arka Mallick
+  description: This is a billing/payment API.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Dr sattler Bar Payment API
+  version: "1.0"
+paths:
+  /bill:
+    get:
+      consumes:
+      - application/json
+      description: getBill locates the bill amount whose ID value matches the id
+      parameters:
+      - description: table id
+        in: query
+        name: tableid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/main.bill'
+            type: array
+  /newbill:
+    post:
+      consumes:
+      - application/json
+      description: postPrepareBill adds an bill from JSON received in the request
+        body.
+      parameters:
+      - description: New bill details
+        in: body
+        name: bill
+        required: true
+        schema:
+          $ref: '#/definitions/main.bill'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+  /payment:
+    post:
+      consumes:
+      - application/json
+      description: postProcessPayment adds an payment from JSON received in the request
+        body.
+      parameters:
+      - description: payment details
+        in: body
+        name: payment
+        required: true
+        schema:
+          $ref: '#/definitions/main.payment'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/main.payment'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+  /payments:
+    get:
+      consumes:
+      - application/json
+      description: getPayments responds with the list of all payments Recieved as
+        JSON.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/main.payment'
+            type: array
+swagger: "2.0"
