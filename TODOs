@@ -42,4 +42,6 @@ REST Methods are in place, we need to Dockerize the app and test it, Write test 
 Implemented the payment API with go and gin.
 https://go.dev/doc/tutorial/web-service-gin
 
-curl http://localhost:8080/payment/3/cash --include --header "Content-Type: application/json" --request "POST" --data '{"tableid":"3","method":"credit"}'
+curl http://localhost:8080/payment/ --include --header "Content-Type: application/json" --request "POST" --data '{"tableid":"3","method":"credit"}'
+
+https://github.com/go-swagger/go-swagger

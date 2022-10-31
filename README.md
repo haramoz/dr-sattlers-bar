@@ -1,17 +1,24 @@
 # dr-sattlers-bar
 Microservices for serving cocktails
 
-System Design is in progress:
+System Design is in progress ...
 
-![System Design](dr-sattlers-bar-design.drawio.png)
+Made decisions:
+React UI
+Spring boot and go microservices
+Junit test cases
+Ci/cd
+Kafka event driven design
+prometheus grafana
+H2 or postgres DB
 
 ## Ui
 This is the web interface. Following APIs are available:
-1) Read menu (Get menu/cocktails) (Get menu/cocktailid)
-2) Order (post order/cocktailid)
-3) Check order status (get status/cocktailid)
-4) GraphQl isAlcoholic?
-5) Pay (Post pay/billid)
+1) Read menu (Get menu/cocktails) (Get menu/cocktailid) --> waiter
+2) Order (post order/cocktailid) --> waiter
+3) Check order status (get status/cocktailid) --> kitchen
+4) GraphQl isAlcoholic? --> waiter--> kitchen
+5) Pay (Post pay/billid) --> waiter --> payment-go
 
 6) Metrics (admin)
 7) Notifications (admin)
@@ -23,7 +30,11 @@ bar, metrics, notifications
 
 ## Backend
 Some microservices written in node js, some in Java and some in python/go?
-should be separate repositories I guess?
+
+### Waiter microservice
+It is written in Java, REST APIs for taking order, serving food and initiating payment. TODO enable kafka based event driven design
+### Payment-go microservice
+It handles payment and bill REST methods, written in go. TO add kafka and enable event driven design
 
 ## Events
 
@@ -40,38 +51,19 @@ https://www.confluent.io/blog/spring-for-apache-kafka-deep-dive-part-1-error-han
 
 ## Actors
 https://github.com/topics/actor-model
+We are not implementing actor model, because our usecase does not need it yet.
 
 ## Dockerize
+Each of the backend microservices needs to be Dockerized separately, kafka, database, ui needs to be Dockerized as well.
 
-## Keycloak
-
-docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:19.0.2 start-dev
-
-https://www.keycloak.org/getting-started/getting-started-docker
-
-https://blog.logrocket.com/implement-keycloak-authentication-react/
-
-Later on integration with Samba/openldap ?
-
-https://www.talkingquickly.co.uk/keycloak-and-openldap-on-kubernetes
-
-https://cagline.medium.com/authenticate-and-authorize-react-routes-component-with-keycloak-666e85662636
-
-https://github.com/v-ladynev/keycloak-nodejs-example
-
-
-React Routing and /bar /metrics /notifications
-
-It seems most of the keycloak react library on top of router-dom are based on the version v5. So downgraded to react 16.14.0 and react-router 5.2.0
-
-2022-10-08 01:05:02,388 WARN  [org.keycloak.events] (executor-thread-182) type=CODE_TO_TOKEN_ERROR, realmId=b1d2aa06-1159-4ef2-9944-87c269715c03, clientId=sattlers, userId=null, ipAddress=172.17.0.1, error=invalid_client_credentials, grant_type=authorization_code
-
-this is the error, i might need to focus on microservices instead
-
-## Oauth based sprint security based APIs are a thing!
+## Security
+### Oauth based
+Oauth based spring security based APIs are a thing!
 
 ## Achieved goals
 - Performed a Redux based oauth flow
+- Waiter microservices offering REST APIs
+- Payment-go microservices offering REST APIs
 
 
 
