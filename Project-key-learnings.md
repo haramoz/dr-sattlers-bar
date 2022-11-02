@@ -1,0 +1,3 @@
+1. In architecture you can chose event driven and REST together, the REST ones are synchronous and event driven ones are async, hence fire and forget. Sometimes, you can not afford to fire and forget, for example, Authentication, payment etc.
+2. Microservices should not have common libraries, but in event driven design, you need a common base for events, as well as producer and consumer of msges.
+3. Kafka does not support JSON serialization/deserialization, hence we need to use the one from Springboot instead

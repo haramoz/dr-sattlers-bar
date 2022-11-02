@@ -12,6 +12,9 @@ Kafka event driven design
 prometheus grafana
 H2 or postgres DB
 
+![Architecture](dr-sattlers-bar-design.drawio.png)
+
+
 ## Ui
 This is the web interface. Following APIs are available:
 1) Read menu (Get menu/cocktails) (Get menu/cocktailid) --> waiter
@@ -24,6 +27,8 @@ This is the web interface. Following APIs are available:
 7) Notifications (admin)
 
 Error handling
+
+![UX](ux.png)
 
 ### Routes
 bar, metrics, notifications
