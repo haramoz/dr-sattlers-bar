@@ -29,6 +29,8 @@ payment failed
 
 Namespace:
 com.dr.sattlers.bar.employee.waiter
+com.dr.sattlers.bar.infra.kafka
+com.dr.sattlers.bar.infra.config
 
 Refs:
 https://techdozo.dev/restful-microservices-with-spring-boot-and-kubernetes/
@@ -45,3 +47,6 @@ https://go.dev/doc/tutorial/web-service-gin
 curl http://localhost:8080/payment/ --include --header "Content-Type: application/json" --request "POST" --data '{"tableid":"3","method":"credit"}'
 
 https://github.com/go-swagger/go-swagger
+
+Doing Kafka experiment
+https://www.baeldung.com/ops/kafka-docker-setup - > Could be useful for the Dockerizing step  
