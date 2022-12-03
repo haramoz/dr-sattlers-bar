@@ -1,0 +1,9 @@
+{"namespace": "com.dr.sattlers.bar.infra.kafka.payload",
+  "type": "record",
+  "name": "PaymentProcessed",
+  "fields": [
+    {"name": "tableId", "type": "string"},
+    {"name": "amount", "type": "long"},
+    {"name": "isSuccess", "type": "boolean"}
+  ]
+}

@@ -1,0 +1,9 @@
+{"namespace": "com.dr.sattlers.bar.infra.kafka.payload",
+  "type": "record",
+  "name": "OrderReceived",
+  "fields": [
+    {"name": "tableId", "type": "string"},
+    {"name": "food", "type": ["null", "string"]},
+    {"name": "drinks", "type": ["null", "string"]}
+  ]
+}
