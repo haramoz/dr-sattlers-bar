@@ -12,7 +12,7 @@ Kafka event driven design
 prometheus grafana
 H2 or postgres DB
 
-![Architecture](dr-sattlers-bar-design.drawio.png)
+![Architecture](system-design.png)
 
 
 ## Ui

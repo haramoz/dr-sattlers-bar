@@ -1,5 +1,7 @@
 package com.dr.sattlers.bar.employee.waiter.service.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,14 +14,17 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
-public class GreetingController {
+public class WaiterController {
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @GetMapping("/greeting")
-    public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
+    private static final Logger LOG = LoggerFactory.getLogger(WaiterController.class);
+
+    @GetMapping("/welcome")
+    public Welcome greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+        LOG.info("Welcome {}! Your table number is {}", name ,  counter.incrementAndGet());
+        return new Welcome(counter.incrementAndGet(), String.format(template, name));
     }
 
     @GetMapping("/menu")
