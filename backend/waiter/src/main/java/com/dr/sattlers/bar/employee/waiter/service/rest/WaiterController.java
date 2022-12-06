@@ -1,7 +1,10 @@
 package com.dr.sattlers.bar.employee.waiter.service.rest;
 
+import com.dr.sattlers.bar.infra.kafka.payload.OrderDelivered;
+import com.dr.sattlers.bar.infra.kafka.producer.service.impl.OrderDeliveredKafkaProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +22,10 @@ public class WaiterController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
+    private long tableId;
+
+    @Autowired private OrderDeliveredKafkaProducer orderDeliveredKafkaProducer;
+
     private static final Logger LOG = LoggerFactory.getLogger(WaiterController.class);
 
     @GetMapping("/welcome")
@@ -29,7 +36,7 @@ public class WaiterController {
 
     @GetMapping("/menu")
     public String menu() {
-        return "Alcohol & Food";
+        return "Alcohol & Food & more alcohol";
     }
 
     /**
@@ -54,7 +61,16 @@ public class WaiterController {
     public boolean takeOrders(
             @RequestParam(value = "table", defaultValue = "1")
             String tableId) {
+
         //TODO process the order with database & Event
+        OrderDelivered orderDelivered = new OrderDelivered();
+        orderDelivered.setTableId(tableId);
+        orderDelivered.setDrinks("Beers");
+        orderDelivered.setFood("Steak");
+        orderDeliveredKafkaProducer.send(
+                "com.dr.sattlers.bar.infra.kafka.payload.OrderDelivered",
+                getTableId() ,
+                orderDelivered);
         return true;
     }
 
@@ -66,5 +82,15 @@ public class WaiterController {
                                        String amount) {
         // TODO process payment via external service API
         return true;
+    }
+
+    // Setter Getters TODO what happened to Lombok?
+
+    public long getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(long tableId) {
+        this.tableId = tableId;
     }
 }
