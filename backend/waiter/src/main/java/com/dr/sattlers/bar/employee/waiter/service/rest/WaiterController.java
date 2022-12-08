@@ -67,6 +67,8 @@ public class WaiterController {
         orderDelivered.setTableId(tableId);
         orderDelivered.setDrinks("Beers");
         orderDelivered.setFood("Steak");
+
+
         orderDeliveredKafkaProducer.send(
                 "com.dr.sattlers.bar.infra.kafka.payload.OrderDelivered",
                 getTableId() ,
