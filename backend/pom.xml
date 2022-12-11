@@ -69,6 +69,18 @@
             </dependency>
 
             <dependency>
+                <groupId>com.dr.sattlers.bar</groupId>
+                <artifactId>kafka-model</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dr.sattlers.bar</groupId>
+                <artifactId>database</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.dr.sattlers.bar.employee</groupId>
                 <artifactId>waiter</artifactId>
                 <version>0.0.1-SNAPSHOT</version>

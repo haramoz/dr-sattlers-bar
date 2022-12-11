@@ -36,6 +36,11 @@
 
 		<dependency>
 			<groupId>com.dr.sattlers.bar</groupId>
+			<artifactId>kafka-model</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dr.sattlers.bar</groupId>
 			<artifactId>kafka-consumer</artifactId>
 		</dependency>
 
