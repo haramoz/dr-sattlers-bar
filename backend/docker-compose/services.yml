@@ -1,5 +1,7 @@
 version: '3.3'
 services:
+  waiter-service:
+
   postgres:
     image: postgres:10.5
     restart: always
