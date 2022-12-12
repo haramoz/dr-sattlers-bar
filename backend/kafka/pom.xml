@@ -9,11 +9,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.dr.sattlers.bar.infra</groupId>
 	<artifactId>kafka</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>kafka</name>
-	<description>Kafka configs, models</description>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>

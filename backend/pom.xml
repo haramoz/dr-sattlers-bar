@@ -19,6 +19,7 @@
         <version>2.3.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.dr.sattlers.bar</groupId>
     <artifactId>microservices-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -81,13 +82,13 @@
             </dependency>
 
             <dependency>
-                <groupId>com.dr.sattlers.bar.employee</groupId>
+                <groupId>com.dr.sattlers.bar</groupId>
                 <artifactId>waiter</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.dr.sattlers.bar.employee</groupId>
+                <groupId>com.dr.sattlers.bar</groupId>
                 <artifactId>kitchen</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
@@ -196,20 +197,22 @@
 
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring-boot.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
-                    <configuration>
-                        <release>11</release>
-                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

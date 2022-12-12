@@ -10,11 +10,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.dr.sattlers.bar.employee</groupId>
 	<artifactId>waiter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>waiter</name>
-	<description>Waiter serving the holy grail</description>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -23,10 +20,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency-->
-		<dependency>
+		<!--dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+		</dependency-->
 
 		<dependency>
 			<groupId>com.dr.sattlers.bar</groupId>
@@ -59,20 +56,22 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -84,21 +83,22 @@
 					<image>
 						<name>${project.groupId}/employee.waiter:${project.version}</name>
 					</image>
-					<!--excludes>
+					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</exclude>
-					</excludes-->
+					</excludes>
 				</configuration>
-				<executions>
+
+				<!--executions>
 					<execution>
 						<phase>install</phase>
 						<goals>
 							<goal>build-image</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions-->
 			</plugin>
 		</plugins>
 	</build>
