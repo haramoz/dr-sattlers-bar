@@ -1,4 +1,4 @@
-package com.dr.sattlers.bar.infra.kafka.consumer.config;
+package com.dr.sattlers.bar.infra.kafka.consumer;
 
 
 import com.dr.sattlers.bar.config.KafkaConfigData;

@@ -1,6 +1,6 @@
 package com.dr.sattlers.bar.employee.waiter.service.rest;
 
-/*import com.dr.sattlers.bar.infra.kafka.payload.OrderDelivered;
+import com.dr.sattlers.bar.infra.kafka.payload.OrderDelivered;
 import com.dr.sattlers.bar.infra.kafka.producer.service.impl.OrderDeliveredKafkaProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;*/
+import java.util.concurrent.atomic.AtomicLong;
 
-//@RestController
-//@ComponentScan(basePackages = "com.dr.sattlers.bar")
+@RestController
+@ComponentScan(basePackages = "com.dr.sattlers.bar")
 public class WaiterController {
 
-    /*private static final String template = "Hello, %s!";
+    private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
     private long tableId;
@@ -39,13 +39,13 @@ public class WaiterController {
     @GetMapping("/menu")
     public String menu() {
         return "Alcohol & Food & more alcohol";
-    }*/
+    }
 
     /**
     * Returns ETA in minutes
     * @RequestParam: String TableId.
     *  **/
-    /*@GetMapping("/etaFood")
+    @GetMapping("/etaFood")
     public int etaFood(@RequestParam(value = "table",
             defaultValue = "1") String tableId) {
         //TODO tableID based return
@@ -96,5 +96,5 @@ public class WaiterController {
 
     public void setTableId(long tableId) {
         this.tableId = tableId;
-    }*/
+    }
 }
