@@ -20,6 +20,26 @@ services:
       - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
     networks:
       - ${GLOBAL_NETWORK:-services}
+  kitchen-service:
+    image: ${GROUP_ID}/employee.kitchen:${SERVICE_VERSION:-latest}
+    ports:
+      - "8890:8082"
+    volumes:
+      - "./docker-logs:/workspace/kitchen-service/logs"
+    depends_on:
+      - kafka-broker-1
+      - kafka-broker-2
+      - kafka-broker-3
+    environment:
+      #- "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8080 -Xms128m -Xmx256m"
+      - "LOGGING_LEVEL_COM_MICROSERVICES_DEMO=info"
+      - "LOGGING_LEVEL_ROOT=info"
+      - "KAFKA-CONFIG_TOPIC-NAME=order-received"
+      - "KAFKA-CONFIG_TOPIC-NAMES-TO-CREATE_0=order-received"
+      - "KAFKA-CONFIG_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
+      - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
+    networks:
+      - ${GLOBAL_NETWORK:-services}
   #postgres:
     #image: postgres:10.5
     #restart: always

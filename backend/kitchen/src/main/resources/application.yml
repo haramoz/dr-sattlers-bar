@@ -1,5 +1,7 @@
-waiter-service:
-  welcome-message: Ciao daddy!
+server:
+  port : 8082
+kitchen-service:
+  closing-time: 10
 retry-config:
   initial-interval-ms: 1000
   max-interval-ms: 10000
@@ -14,7 +16,6 @@ kafka-config:
   topic-name: order-received
   topic-names-to-create:
     - order-received
-    - order-delivered
   num-of-partitions: 3
   replication-factor: 3
 
@@ -32,7 +33,7 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  consumer-group-id: order-received-consumer
+  consumer-group-id: kitchen-topic-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

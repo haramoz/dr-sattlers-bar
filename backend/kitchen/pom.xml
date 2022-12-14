@@ -9,11 +9,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.dr.sattlers.bar.employee</groupId>
 	<artifactId>kitchen</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>kitchen</name>
-	<description>Kitchen is responsible for making the cocktails and handling the inventory</description>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -36,9 +33,30 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
+			<groupId>com.dr.sattlers.bar</groupId>
+			<artifactId>kafka-producer</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dr.sattlers.bar</groupId>
+			<artifactId>kafka-model</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dr.sattlers.bar</groupId>
+			<artifactId>kafka-consumer</artifactId>
+		</dependency>
+
+		<!--dependency>
+			<groupId>com.dr.sattlers.bar</groupId>
+			<artifactId>kafka-admin</artifactId>
+		</dependency-->
+
+		<dependency>
+			<groupId>com.dr.sattlers.bar</groupId>
+			<artifactId>common-config</artifactId>
 		</dependency>
 
 		<!--dependency>
@@ -56,7 +74,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+
+		<!--dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webflux</artifactId>
 			<scope>test</scope>
@@ -66,7 +85,7 @@
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency-->
 	</dependencies>
 
 	<build>
@@ -75,6 +94,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<image>
+						<name>${project.groupId}/employee.kitchen:${project.version}</name>
+					</image>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -82,9 +104,19 @@
 						</exclude>
 					</excludes>
 				</configuration>
+
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>build-image</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
+
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>

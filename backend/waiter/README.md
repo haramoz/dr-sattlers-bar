@@ -1,11 +1,11 @@
 ## TODOs
 
 - Dockerize the waiter app - DONE
-- kafka admin create new order-received msg - blocked
-- Waiter produces new order-received msg - blocked
-- test the kafka producer msg - blocked
-- test the kafka consumer msg - blocked
-- test the REST Apis using docker - wip
+- kafka admin create new order-received msg - wip
+- Waiter produces new order-received msg - wip
+- test the kafka producer msg - wip
+- test the kafka consumer msg - wip
+- test the REST Apis using docker - DONE
 - test the database connection and integration - new
 - Basic React UI
 

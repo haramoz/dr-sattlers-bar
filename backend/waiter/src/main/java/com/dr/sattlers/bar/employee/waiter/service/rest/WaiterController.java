@@ -1,10 +1,10 @@
 package com.dr.sattlers.bar.employee.waiter.service.rest;
 
-import com.dr.sattlers.bar.infra.kafka.payload.OrderDelivered;
-import com.dr.sattlers.bar.infra.kafka.producer.service.impl.OrderDeliveredKafkaProducer;
+import com.dr.sattlers.bar.config.KafkaConfigData;
+import com.dr.sattlers.bar.infra.kafka.payload.OrderReceived;
+import com.dr.sattlers.bar.infra.kafka.producer.service.impl.OrderReceivedKafkaProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,9 +26,17 @@ public class WaiterController {
 
     private long tableId;
 
-    @Autowired private OrderDeliveredKafkaProducer orderDeliveredKafkaProducer;
+    private final OrderReceivedKafkaProducer orderReceivedKafkaProducer;
+
+    private final KafkaConfigData kafkaConfigData;
 
     private static final Logger LOG = LoggerFactory.getLogger(WaiterController.class);
+
+    public WaiterController(OrderReceivedKafkaProducer orderReceivedKafkaProducer,
+                            KafkaConfigData kafkaConfigData) {
+        this.orderReceivedKafkaProducer = orderReceivedKafkaProducer;
+        this.kafkaConfigData = kafkaConfigData;
+    }
 
     @GetMapping("/welcome")
     public Welcome greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
@@ -38,6 +46,17 @@ public class WaiterController {
 
     @GetMapping("/menu")
     public String menu() {
+        return "Alcohol & Food & more alcohol";
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        LOG.info("Received GET request {} sending to kafka topic {}", "test", kafkaConfigData.getTopicName());
+        OrderReceived orderReceived = new OrderReceived();
+        orderReceived.setTableId(String.valueOf(getTableId()));
+        orderReceived.setFood("pasta");
+        orderReceived.setDrinks("mojito");
+        orderReceivedKafkaProducer.send(kafkaConfigData.getTopicName(), getTableId(), orderReceived );
         return "Alcohol & Food & more alcohol";
     }
 
@@ -65,16 +84,16 @@ public class WaiterController {
             String tableId) {
 
         //TODO process the order with database & Event
-        OrderDelivered orderDelivered = new OrderDelivered();
-        orderDelivered.setTableId(tableId);
-        orderDelivered.setDrinks("Beers");
-        orderDelivered.setFood("Steak");
+        OrderReceived orderReceived = new OrderReceived();
+        orderReceived.setTableId(String.valueOf(getTableId()));
+        orderReceived.setFood("Steak");
+        orderReceived.setDrinks("AltBier");
 
 
-        orderDeliveredKafkaProducer.send(
-                "com.dr.sattlers.bar.infra.kafka.payload.OrderDelivered",
+        orderReceivedKafkaProducer.send(
+                "com.dr.sattlers.bar.infra.kafka.payload.OrderReceived",
                 getTableId() ,
-                orderDelivered);
+                orderReceived);
         return true;
     }
 
