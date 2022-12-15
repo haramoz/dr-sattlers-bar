@@ -1,5 +1,5 @@
 waiter-service:
-  welcome-message: Ciao daddy!
+  welcome-message: Ciao!
 retry-config:
   initial-interval-ms: 1000
   max-interval-ms: 10000
@@ -11,7 +11,7 @@ kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   schema-registry-url-key: schema.registry.url
   schema-registry-url: http://localhost:8081
-  topic-name: order-received
+  topic-name: order-delivered
   topic-names-to-create:
     - order-received
     - order-delivered
@@ -32,7 +32,7 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  consumer-group-id: order-received-consumer
+  consumer-group-id: waiter-service-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

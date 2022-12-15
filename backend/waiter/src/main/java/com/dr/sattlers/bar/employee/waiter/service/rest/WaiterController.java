@@ -1,6 +1,7 @@
 package com.dr.sattlers.bar.employee.waiter.service.rest;
 
 import com.dr.sattlers.bar.config.KafkaConfigData;
+import com.dr.sattlers.bar.infra.kafka.payload.OrderDelivered;
 import com.dr.sattlers.bar.infra.kafka.payload.OrderReceived;
 import com.dr.sattlers.bar.infra.kafka.producer.service.impl.OrderReceivedKafkaProducer;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @RestController
 @ComponentScan(basePackages = "com.dr.sattlers.bar")
 public class WaiterController {
+    private static final Logger LOG = LoggerFactory.getLogger(WaiterController.class);
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
@@ -30,7 +32,9 @@ public class WaiterController {
 
     private final KafkaConfigData kafkaConfigData;
 
-    private static final Logger LOG = LoggerFactory.getLogger(WaiterController.class);
+    private final String ORDER_RECEIVED = "order-received";
+    private final String ORDER_DELIVERED = "order-delivered";
+
 
     public WaiterController(OrderReceivedKafkaProducer orderReceivedKafkaProducer,
                             KafkaConfigData kafkaConfigData) {
@@ -49,16 +53,6 @@ public class WaiterController {
         return "Alcohol & Food & more alcohol";
     }
 
-    @GetMapping("/test")
-    public String test() {
-        LOG.info("Received GET request {} sending to kafka topic {}", "test", kafkaConfigData.getTopicName());
-        OrderReceived orderReceived = new OrderReceived();
-        orderReceived.setTableId(String.valueOf(getTableId()));
-        orderReceived.setFood("pasta");
-        orderReceived.setDrinks("mojito");
-        orderReceivedKafkaProducer.send(kafkaConfigData.getTopicName(), getTableId(), orderReceived );
-        return "Alcohol & Food & more alcohol";
-    }
 
     /**
     * Returns ETA in minutes
@@ -91,7 +85,7 @@ public class WaiterController {
 
 
         orderReceivedKafkaProducer.send(
-                "com.dr.sattlers.bar.infra.kafka.payload.OrderReceived",
+                ORDER_RECEIVED,
                 getTableId() ,
                 orderReceived);
         return true;

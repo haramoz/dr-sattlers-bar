@@ -16,6 +16,7 @@ kafka-config:
   topic-name: order-received
   topic-names-to-create:
     - order-received
+    - order-delivered
   num-of-partitions: 3
   replication-factor: 3
 
