@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a billing/payment API.",
+        "description": "Removes the desired index from the Bills slice",
         "title": "Dr sattler Bar Payment API",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
@@ -83,7 +83,7 @@
                 }
             }
         },
-        "/payment": {
+        "/newpayment": {
             "post": {
                 "description": "postProcessPayment adds an payment from JSON received in the request body.",
                 "consumes": [

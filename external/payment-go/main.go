@@ -46,7 +46,7 @@ func main() {
 	router := gin.Default()
 	router.GET("/bill/:tableid", getBill)
 	router.GET("/payments", getPayments)
-	router.POST("/payment", postProcessPayment)
+	router.POST("/newpayment", postProcessPayment)
 	router.POST("/newbill", postPrepareBill)
 
 	router.Run("localhost:8080")
@@ -68,7 +68,7 @@ func getPayments(c *gin.Context) {
 // @Produce json
 // @Success 201 object payment
 // @Failure 404 string error
-// @Router /payment [post]
+// @Router /newpayment [post]
 // @Param payment body payment true "payment details"
 func postProcessPayment(c *gin.Context) {
 	var newPayment payment
@@ -108,7 +108,8 @@ func updateBill(tableId string, c *gin.Context) float64 {
 	return 0
 }
 
-// Removes the desired index from the Bills slice
+// RemoveIndex godoc
+// @Description Removes the desired index from the Bills slice
 func RemoveIndex(s []bill, index int) []bill {
 	return append(s[:index], s[index+1:]...)
 }
@@ -147,10 +148,12 @@ func postPrepareBill(c *gin.Context) {
 func getBill(c *gin.Context) {
 	id := c.Param("tableid")
 
-	// Loop through the list of albums, looking for
-	// an album whose ID value matches the parameter.
-	for _, a := range bills {
+	for b, a := range bills {
+		fmt.Println(a.TableID)
+		fmt.Println(b)
+
 		if a.TableID == id {
+			fmt.Println("match")
 			c.IndentedJSON(http.StatusOK, a)
 			return
 		}

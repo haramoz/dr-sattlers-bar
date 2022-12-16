@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "0ec218a4-89b7-4b55-a417-47de52aea6ae",
+		"name": "payment-go",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2122853"
+	},
+	"item": [
+		{
+			"name": "Bill/tableid GET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tableid\":\"1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/bill/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bill",
+						"1"
+					]
+				},
+				"description": "Bill/tableid GET"
+			},
+			"response": []
+		},
+		{
+			"name": "New Payment POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"method\":\"cash\", \"tableid\":\"1\", \"amount\":20.0}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/newpayment",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"newpayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payments GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/payments",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New bill POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tableId\":\"1\", \"amount\":10.0}"
+				},
+				"url": {
+					"raw": "localhost:8080/newbill",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"newbill"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New bill POST",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"tableId\":\"1\", \"amount\":10.0}"
+						},
+						"url": {
+							"raw": "localhost:8080/newbill",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"newbill"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 16 Dec 2022 00:53:39 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"tableid\": \"1\",\n    \"amount\": 10\n}"
+				}
+			]
+		}
+	]
+}

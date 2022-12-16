@@ -91,7 +91,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/payment": {
+        "/newpayment": {
             "post": {
                 "description": "postProcessPayment adds an payment from JSON received in the request body.",
                 "consumes": [
@@ -186,7 +186,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "Dr sattler Bar Payment API",
-	Description:      "This is a billing/payment API.",
+	Description:      "Removes the desired index from the Bills slice",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }
