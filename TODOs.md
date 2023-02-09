@@ -1,4 +1,5 @@
 # Open tasks:
+1. Add ssh for the office laptop
 2. Dockerize Payment-go
 3. Dockerize UI
 7. Setup consumption of payment REST API by Waiter
