@@ -4,11 +4,17 @@ import Header from './Header';
 import HomePage from '../pages/HomePage';
 import Metrics from '../pages/Metrics';
 import Notifications from '../pages/Notifications';
-
+import backgroundImage from '../img/bar.jpg';
 
 const App = () => {
   return (
-    <div className="ui container">
+    <div className="ui container" 
+    style={{
+      backgroundImage: `url(${backgroundImage})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      height: '100vh',
+    }}>
       <BrowserRouter>
         <div>
           <Header />
