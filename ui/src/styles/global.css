@@ -35,8 +35,8 @@ margin-top: 5%;
 .welcome-text {  
     color: rgb(180, 72, 166);
     animation-name: maiden;
-    animation-duration: 4s;
-    animation-iteration-count: 15;
+    animation-duration: 3s;
+    animation-iteration-count: 30;
     animation-delay: 2ms;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-shadow: 2px 2px #8e9094;
@@ -45,8 +45,8 @@ margin-top: 5%;
   
   @keyframes maiden {
     0%   {color: rgb(243, 94, 8);padding-bottom:2px}
-    25%  {color: yellow;padding-bottom:0px}
-    50%  {color: rgb(255, 0, 76);padding-bottom:2px}
-    100% {color: green; padding-bottom:0px}
+    25%  {color: yellow;padding-bottom:5px}
+    50%  {color: rgb(255, 0, 76);padding-bottom:3px}
+    100% {color: green; padding-bottom:1px}
   }
   
