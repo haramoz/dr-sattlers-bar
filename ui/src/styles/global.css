@@ -25,6 +25,28 @@ background-color: #b5fac7;
 color: #316685;
 text-align: center;
 font-size: 3.5rem;
-margin-top: 10%;
+margin-top: 5%;
 }
+
+.maiden {
+    cursor: help;
+}
+
+.welcome-text {  
+    color: rgb(180, 72, 166);
+    animation-name: maiden;
+    animation-duration: 4s;
+    animation-iteration-count: 15;
+    animation-delay: 2ms;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px #8e9094;
+    margin-bottom: 7px;
+  }
+  
+  @keyframes maiden {
+    0%   {color: rgb(243, 94, 8);padding-bottom:2px}
+    25%  {color: yellow;padding-bottom:0px}
+    50%  {color: rgb(255, 0, 76);padding-bottom:2px}
+    100% {color: green; padding-bottom:0px}
+  }
   

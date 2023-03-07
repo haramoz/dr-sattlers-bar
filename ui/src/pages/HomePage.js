@@ -1,10 +1,11 @@
 import React from "react";
+import maiden from "../img/bar-maiden.png"
 
 const HomePage = () => {
     return (
         <div>
-            <div > Home page </div>
-            <h3>  Welcome ! </h3>
+            <div className="welcome-text"> Ciao!</div>
+            <img src={maiden} alt="Hey!" className="maiden"/>
         </div>
     )
 }

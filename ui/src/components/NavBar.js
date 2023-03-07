@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
-import { ReactComponent as LogoImage } from '../img/logos/logo-white-on-transparent.svg';
+import logo from '../img/logos/logo-color-on-transparent-background.png';
 
 function NavBar() {
   const [click, setClick] = useState(false);
@@ -12,7 +12,7 @@ function NavBar() {
       <nav className="navbar">
         <div className="nav-container">
           <NavLink exact to="/" className="nav-logo">
-            <LogoImage/>
+            <img src={logo} alt="Logo" className="logo-image"/>
           </NavLink>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
