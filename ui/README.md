@@ -12,3 +12,5 @@ npm install --save @fortawesome/react-fontawesome </pre>
 
 
 # Links
+[How to use google fonts](https://developers.google.com/fonts/docs/css2)
+
