@@ -30,17 +30,18 @@ margin-top: 5%;
 
 .maiden {
     cursor: help;
+    height: 450px;
 }
 
-.welcome-text {  
+.welcome-text{  
     color: rgb(180, 72, 166);
     animation-name: maiden;
     animation-duration: 3s;
     animation-iteration-count: 30;
     animation-delay: 2ms;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-shadow: 2px 2px #8e9094;
-    margin-bottom: 7px;
+    margin-bottom: 20px;
   }
   
   @keyframes maiden {
@@ -48,5 +49,9 @@ margin-top: 5%;
     25%  {color: yellow;padding-bottom:5px}
     50%  {color: rgb(255, 0, 76);padding-bottom:3px}
     100% {color: green; padding-bottom:1px}
+  }
+
+  .music-home-page {
+    width: 30px;
   }
   
