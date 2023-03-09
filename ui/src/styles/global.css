@@ -35,6 +35,26 @@ body {
   height: 450px;
 }
 
+.menu1, .menu2, .menu3, .menu5 {
+  height: 150px;
+  margin:5px;
+}
+
+.menu1:hover, .menu2:hover, .menu3:hover, .menu5:hover, .menu6:hover {
+  transform: scale(1.5);
+  /*box-shadow: 0 4px 2px -2px rgba(230, 226, 9, 0.911);*/
+}
+
+.menu5, .menu2 {
+  padding-top: 20px;
+}
+
+.menu6, .menu1 {
+  height: 130px;
+  padding-top: 40px;
+  margin:5px;
+}
+
 .welcome-text {
   color: rgb(180, 72, 166);
   animation-name: maiden;
