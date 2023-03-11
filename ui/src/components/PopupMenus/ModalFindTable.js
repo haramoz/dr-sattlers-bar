@@ -10,7 +10,7 @@ function ModalMenu() {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button className="ui button" id="menu3btn" data-tooltip="Find Table" data-position="top left" >
+            trigger={<Button className="img-button" id="menu3btn" data-tooltip="Find Table" data-inverted="" data-position="bottom center" >
                 <img src={menu3} id="menu3" alt="menu3" className="menu3"
                 />
             </Button>}

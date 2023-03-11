@@ -19,7 +19,19 @@ function HomePage() {
   };
 
   const handleClickOutside = (e) => {
-    setShowSubMenu(false);
+
+    console.log("handle click outside is called");
+    // Get a reference to the element that triggered the event
+    const clickedElement = e.target;
+
+    console.log(clickedElement);
+
+    // Check if the clicked element should be ignored
+    if (clickedElement.classList.contains("menu-container")) {
+      console.log("inside");
+      setShowSubMenu(false);
+    }
+    
   };
 
 
@@ -38,12 +50,12 @@ function HomePage() {
       {!showSubMenu && (<div className="welcome-text"> Welcome! </div>)}
 
       {showSubMenu && (
-        <div className="sub-menu">
-          <ModalPayBill/>
-          <ModalOrderStatus/>
-          <ModalFindTable/>
-          <ModalPlaceOrder/>
-          <ModalGetMenu />         
+        <div className="sub-menu ignore-click-outside">
+          <ModalPayBill />
+          <ModalOrderStatus />
+          <ModalFindTable />
+          <ModalPlaceOrder />
+          <ModalGetMenu />
         </div>
       )}
 
@@ -51,7 +63,7 @@ function HomePage() {
 
       <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeUp} onClick={toggleSound} className="music-home-page" />
       <audio ref={audioRef} src={soundFile} />
-      
+
     </div>
   );
 }

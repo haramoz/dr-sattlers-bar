@@ -10,7 +10,7 @@ function ModalPlaceOrder() {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button className="ui button" id="menu4btn" data-tooltip="Place Order" data-position="top left" >
+            trigger={<Button className="img-button" id="menu4btn" data-tooltip="Place Order" data-inverted="" data-position="bottom center" >
                 <img src={menu4} id="menu4" alt="menu4" className="menu4"
                 />
             </Button>}
