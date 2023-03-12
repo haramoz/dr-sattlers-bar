@@ -1,5 +1,5 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'New Rocker', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
 }
@@ -102,4 +102,30 @@ body {
 
 .music-home-page {
   width: 30px;
+}
+
+.bar-menu-header {
+  font-family: 'New Rocker' !important;
+  text-shadow: 1px 1px #8e9094;
+  text-align: center;
+  font-size: 36px;
+  background-color: #1f5156 !important;
+}
+
+/*
+
+.get-menu-modal {
+  background-image: url('/frontend/ui/src/img/old-menu.jpg');
+  background-size: cover !important;
+}
+
+*/
+
+.logo-menu {
+  height: 48px;
+}
+
+/* Custom Semantic ui overwrite */
+.ui.modal {
+  font-family: 'New Rocker', 'Open Sans', sans-serif;
 }

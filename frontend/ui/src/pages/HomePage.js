@@ -20,15 +20,10 @@ function HomePage() {
 
   const handleClickOutside = (e) => {
 
-    console.log("handle click outside is called");
-    // Get a reference to the element that triggered the event
     const clickedElement = e.target;
-
-    console.log(clickedElement);
 
     // Check if the clicked element should be ignored
     if (clickedElement.classList.contains("menu-container")) {
-      console.log("inside");
       setShowSubMenu(false);
     }
     

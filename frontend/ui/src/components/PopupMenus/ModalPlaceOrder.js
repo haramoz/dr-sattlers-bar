@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import menu4 from "../../img/menu4.png"
+import ModalHeader from "./ModalHeaders.js"
 
 function ModalPlaceOrder() {
     const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ function ModalPlaceOrder() {
                 />
             </Button>}
         >
-            <Modal.Header>Place Order</Modal.Header>
+            <ModalHeader/>
             <Modal.Content>
                 <p>Place Order Service goes here.</p>
             </Modal.Content>

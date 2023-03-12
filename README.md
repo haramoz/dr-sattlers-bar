@@ -4,7 +4,7 @@ Microservices for serving cocktails
 System Design is in progress ...
 
 Made decisions:
-React UI
+React UI with Semantic UI, Redux-thunk
 Spring boot and go microservices
 Junit test cases
 Ci/cd

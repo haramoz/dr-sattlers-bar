@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import menu1 from "../../img/menu1.png";
+import ModalHeader from "./ModalHeaders.js"
 
 function ModalMenu() {
     const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ function ModalMenu() {
                 />
             </Button>}
         >
-            <Modal.Header>Pay Bill</Modal.Header>
+            <ModalHeader/>
             <Modal.Content>
                 <p>Pay Bill goes here.</p>
             </Modal.Content>

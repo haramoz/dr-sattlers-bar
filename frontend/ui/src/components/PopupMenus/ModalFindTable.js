@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import menu3 from "../../img/menu3.png";
+import ModalHeader from "./ModalHeaders.js"
 
 function ModalMenu() {
     const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ function ModalMenu() {
                 />
             </Button>}
         >
-            <Modal.Header>Find Table</Modal.Header>
+            <ModalHeader/>
             <Modal.Content>
                 <p>List of tables goes here.</p>
             </Modal.Content>

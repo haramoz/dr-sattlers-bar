@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import menu2 from "../../img/menu2.png";
+import ModalHeader from "./ModalHeaders.js"
 
 function ModalMenu() {
     const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ function ModalMenu() {
                 />
             </Button>}
         >
-            <Modal.Header>Order Status</Modal.Header>
+            <ModalHeader/>
             <Modal.Content>
                 <p>Order Status goes here.</p>
             </Modal.Content>

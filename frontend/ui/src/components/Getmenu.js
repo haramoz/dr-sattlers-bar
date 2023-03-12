@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Table } from 'semantic-ui-react';
+
 
 function Getmenu() {
     const [menuItems, setMenuItems] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:3000/menu')
-          .then(response => setMenuItems(response.data))
-          .catch(error => console.error(error));
-      }, []);
+            .then(response => setMenuItems(response.data))
+            .catch(error => console.error(error));
+    }, []);
 
     return (
-        <div>
-            <h1>Menu Items</h1>
-            <ul>
-                {menuItems.map(item => (
-                    <li key={item.id}>
-                        <div>{item.name}</div>
-                        <div>{item.price}</div>
-                    </li>
+        <Table>
+            <Table.Header>
+                <Table.Row>
+                    <Table.HeaderCell>Item</Table.HeaderCell>
+                    <Table.HeaderCell>Description</Table.HeaderCell>
+                    <Table.HeaderCell>Price</Table.HeaderCell>
+                </Table.Row>
+            </Table.Header>
+            <Table.Body>
+                {menuItems.map((item) => (
+                    <Table.Row key={item.id}>
+                        <Table.Cell>{item.name}</Table.Cell>
+                        <Table.Cell>{item.description}</Table.Cell>
+                        <Table.Cell>{item.price}</Table.Cell>
+                    </Table.Row>
                 ))}
-            </ul>
-        </div>
+            </Table.Body>
+        </Table>
     );
 }
 
