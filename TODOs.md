@@ -16,6 +16,8 @@
 # In Progress
 2. Dockerize UI
 5. Database creation postgres
+1. How is the notification data written to DB ?
+3. Notification flow from kafka broker to react UI
 
 
 # Finished

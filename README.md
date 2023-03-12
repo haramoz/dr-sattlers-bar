@@ -17,7 +17,7 @@ H2 or postgres DB
 
 ## Ui
 This is the web interface. Following APIs are available:
-1) Read menu (Get menu/cocktails) (Get menu/cocktailid) --> waiter
+1) Read menu (Get menu/cocktails) (Get menu/) --> direct database
 2) Order (post order/cocktailid) --> waiter
 3) Check order status (get status/cocktailid) --> kitchen
 4) GraphQl isAlcoholic? --> waiter--> kitchen
@@ -30,11 +30,22 @@ Error handling
 
 ![UX](ux.png)
 
+### Current status:
+![homepage](ui-home-page.png)
+
 ### Routes
-bar, metrics, notifications
+Home, Metrics, Notifications
+
+### Notifications flow
+backend -> Notifications via kafka msg bus -> Kafka-broker(Dockerized) <- JS or java endpoint with kafka consumer that exposes the selected notifications via an Api -> redux-thunk -> react UI
+
+### Metrics flow
+No clue right now :D grafana and prometheus integration surely. Might even show some Jmeter performance data as metrics. wip
 
 ## Backend
 Some microservices written in node js, some in Java and some in python/go?
+
+## List of microservices
 
 ### Waiter microservice
 It is written in Java, REST APIs for taking order, serving food and initiating payment. TODO enable kafka based event driven design
@@ -52,7 +63,6 @@ https://www.confluent.io/blog/spring-for-apache-kafka-deep-dive-part-2-apache-ka
 
 https://www.confluent.io/blog/spring-for-apache-kafka-deep-dive-part-1-error-handling-message-conversion-transaction-support/
 
-## List of microservices
 
 ## Actors
 https://github.com/topics/actor-model
@@ -66,9 +76,11 @@ Each of the backend microservices needs to be Dockerized separately, kafka, data
 Oauth based spring security based APIs are a thing!
 
 ## Achieved goals
-- Performed a Redux based oauth flow
+- Performed a Redux based oauth flow (Right now deactivated)
 - Waiter microservices offering REST APIs
 - Payment-go microservices offering REST APIs
+- UI welcoming functionality and skeleton look and feel
+- Redesigned the frontend module to improve the design based on containerization needs
 
 
 
