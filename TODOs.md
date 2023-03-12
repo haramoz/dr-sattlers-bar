@@ -1,25 +1,33 @@
 # Open tasks:
 
-2. Dockerize Payment-go
+1. Dockerize Payment-go
 
-7. Setup consumption of payment REST API by Waiter
+2. Setup consumption of payment REST API by Waiter
 
-6. Test cases for Waiter
+3. Test cases for Waiter
+6. CICD deployment (Docker + Jenkins?)
+7. Pipeline creation
+8. Dockerize Payment-go
+9. Educate yourself about jest , a JS testing framework
+10. Security for the GUI ...! #EndBoss
 
 # In Progress
-11. Dockerize Payment-go
-10. UI Welcoming function
-3. Dockerize UI
+2. Dockerize UI
+5. Database creation postgres
+4. Integration with the backend and frontend (Get Menu)
+
 
 # Finished
-8. Kafka producer config
-9. Kafka consumer config
-1. Dockerize Waiter
+1. Kafka producer config
+2. Kafka consumer config
+3. Dockerize Waiter
 4. Dockerize kitchen
 5. Docker-compose for the backend
-2. Create Springboot Kitchen
+6. Create Springboot Kitchen
 7. Kafka common structure with events 
 8. look and feel improvements
-1. Add ssh for the office laptop
+9. Add ssh for the office laptop
+10. UI Welcoming function
+
 
 

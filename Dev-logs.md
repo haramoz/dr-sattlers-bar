@@ -50,3 +50,10 @@ https://github.com/go-swagger/go-swagger
 
 Doing Kafka experiment
 https://www.baeldung.com/ops/kafka-docker-setup - > Could be useful for the Dockerizing step  
+
+11 March 2023:
+While integrating the UI with Java and golang backend felt the neeed to create separate node-backend module, which is sitting inside the frontend parent directory parallel with UI folder which contains the react codes.
+
+- node-backend will have its own Dockerfile
+- ui will have its own Dockerfile
+- will eventually have to combine both in a docker-dompose file -> HELM? 
