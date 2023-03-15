@@ -1,11 +1,13 @@
 package com.dr.sattlers.bar.employee.waiter.service.rest;
 
 import com.dr.sattlers.bar.config.KafkaConfigData;
-import com.dr.sattlers.bar.infra.kafka.payload.OrderDelivered;
+import com.dr.sattlers.bar.employee.waiter.service.repository.TableRepository;
+import com.dr.sattlers.bar.employee.waiter.service.model.Table;
 import com.dr.sattlers.bar.infra.kafka.payload.OrderReceived;
 import com.dr.sattlers.bar.infra.kafka.producer.service.impl.OrderReceivedKafkaProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +36,9 @@ public class WaiterController {
 
     private final String ORDER_RECEIVED = "order-received";
     private final String ORDER_DELIVERED = "order-delivered";
+
+    @Autowired
+    private TableRepository tableRepository;
 
 
     public WaiterController(OrderReceivedKafkaProducer orderReceivedKafkaProducer,
@@ -99,6 +104,19 @@ public class WaiterController {
                                        String amount) {
         // TODO process payment via external service API
         return true;
+    }
+
+    @GetMapping("/findtable")
+    public String findTable() {
+        List<Table> freeTables = tableRepository.findByStatus("available");
+        if (freeTables.isEmpty()) {
+            return "Sorry, there are no free tables at the moment.";
+        } else {
+            Table table = freeTables.get(0);
+            table.setStatus("occupied");
+            tableRepository.save(table);
+            return "Your table number is " + table.getTableId();
+        }
     }
 
     // Setter Getters TODO what happened to Lombok?

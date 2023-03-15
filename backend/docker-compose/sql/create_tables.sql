@@ -8,11 +8,13 @@ CREATE TABLE orders (
 
 CREATE TABLE waiters (
   waiter_id varchar(250) NOT NULL,
+  waiter_name varchar(100) NOT NULL,
   PRIMARY KEY (waiter_id)
 );
 
 CREATE TABLE tables (
   table_id varchar(250) NOT NULL,
+  status varchar(10) DEFAULT 'Available',
   PRIMARY KEY (table_id)
 );
 
@@ -33,6 +35,22 @@ CREATE TABLE menu (
   price NUMERIC(10,2) NOT NULL,
   category TEXT NOT NULL
 );
+
+INSERT INTO waiters (waiter_id, waiter_name)
+VALUES ('W001', 'Annika'),
+       ('W007', 'James Bond'),
+       ('W009','Rihanna');
+
+INSERT INTO tables (table_id, status)
+VALUES ('T1', 'Available'),
+       ('T2', 'Available'),
+       ('T3', 'Available'),
+       ('T4', 'Available'),
+       ('T5', 'Available'),
+       ('T6', 'Available'),
+       ('T7', 'Available'),
+       ('T8', 'Available'),
+       ('T9', 'Available');
 
 INSERT INTO menu (name, description, price, category) VALUES ('Cheeseburger', 'Our classic cheeseburger with lettuce, tomato, and pickles.', 9.99, 'Burgers');
 INSERT INTO menu (name, description, price, category) VALUES ('Caesar Salad', 'Fresh romaine lettuce with parmesan cheese, croutons, and Caesar dressing.', 7.99, 'Salads');
