@@ -2,12 +2,13 @@
 # CD
 # Plan
 There are 
-- backend modules, 
-- external modules, 
+- backend modules 
+- external modules 
 - Kafka infrastructure 
 - database and 
 - UI
 - (Metrics monitoring and performance testing) later
+- helm integration (per image helm subfolder)
 
 Honestly no clue how to do this? I think CI is easy with Docker and Jenkins.
 Alternative is to go for Github actions + Github registry + Kubernetes cluster + Argo cd + Manifest/Helm + kubernetes

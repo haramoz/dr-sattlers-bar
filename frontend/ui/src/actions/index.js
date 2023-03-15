@@ -12,3 +12,25 @@ export const signOut = () => {
     type: SIGN_OUT
   };
 };
+
+export function addNotification(notification) {
+  return {
+    type: 'ADD_NOTIFICATION',
+    payload: notification
+  }
+}
+
+export function updateNotification(notification) {
+  return {
+    type: 'UPDATE_NOTIFICATION',
+    payload: notification
+  }
+}
+
+export function deleteNotification(notification) {
+  return {
+    type: 'DELETE_NOTIFICATION',
+    payload: notification
+  }
+}
+
