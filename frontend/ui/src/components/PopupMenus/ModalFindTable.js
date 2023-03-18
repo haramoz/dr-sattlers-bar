@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import menu3 from "../../img/menu3.png";
 import ModalHeader from "./ModalHeaders.js"
+import TableNumber from "../FindTable.js"
+
 
 function ModalMenu() {
     const [open, setOpen] = useState(false);
@@ -18,7 +20,7 @@ function ModalMenu() {
         >
             <ModalHeader/>
             <Modal.Content>
-                <p>List of tables goes here.</p>
+                <TableNumber/>
             </Modal.Content>
             <Modal.Actions>
                 <Button onClick={() => setOpen(false)}>Close</Button>
