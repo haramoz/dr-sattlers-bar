@@ -49,6 +49,20 @@ Some microservices written in node js, some in Java and some in python/go?
 
 ### Waiter microservice
 It is written in Java, REST APIs for taking order, serving food and initiating payment. TODO enable kafka based event driven design
+
+- Get Menu: In this functionality the user can get the static menu from the database directly and display. If no database availble then show no menu to display. ui -> database
+
+- Find Table : This functionality can be triggered from the UI. Internally it creates a GET call via Waiter microservice to get a available table. Perhaps scope in the future for a "waiting system" using event driven table-got-free notification. 
+
+  UI -> GET call to waiter -> Database query.
+  After a table is taken UI-> POST method via waiter
+- Place Order : User or Waiter can place an order for a tableId. Both cases event driven implementation. Kafka topic published to kitchen -> order-recieved topic, paylod, tableid and items and quantity.
+- Order status : ui -> Kitchen microservice REST GET call based on table status. params Table ID, returns status of all the order based on database record. ui -> Kitchen -> Database
+- Pay Bill : REST POST call to go-payment microservice via Waiter microservice. If not available ask for cash :D ui -> Waiter -> payment-go -> database
+
+TODO - Swagger API doc
+https://smartbear.com/news/news-releases/swaggerhub-now-supports-event-driven-asyncapi-spec/
+
 ### Payment-go microservice
 It handles payment and bill REST methods, written in go. TO add kafka and enable event driven design
 
