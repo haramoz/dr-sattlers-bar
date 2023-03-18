@@ -14,7 +14,7 @@ CREATE TABLE waiters (
 
 CREATE TABLE tables (
   table_id varchar(250) NOT NULL,
-  status varchar(10) DEFAULT 'Available',
+  status varchar(10) DEFAULT 'available',
   PRIMARY KEY (table_id)
 );
 
@@ -42,15 +42,15 @@ VALUES ('W001', 'Annika'),
        ('W009','Rihanna');
 
 INSERT INTO tables (table_id, status)
-VALUES ('T1', 'Available'),
-       ('T2', 'Available'),
-       ('T3', 'Available'),
-       ('T4', 'Available'),
-       ('T5', 'Available'),
-       ('T6', 'Available'),
-       ('T7', 'Available'),
-       ('T8', 'Available'),
-       ('T9', 'Available');
+VALUES ('T1', 'available'),
+       ('T2', 'available'),
+       ('T3', 'available'),
+       ('T4', 'available'),
+       ('T5', 'available'),
+       ('T6', 'available'),
+       ('T7', 'available'),
+       ('T8', 'available'),
+       ('T9', 'available');
 
 INSERT INTO menu (name, description, price, category) VALUES ('Cheeseburger', 'Our classic cheeseburger with lettuce, tomato, and pickles.', 9.99, 'Burgers');
 INSERT INTO menu (name, description, price, category) VALUES ('Caesar Salad', 'Fresh romaine lettuce with parmesan cheese, croutons, and Caesar dressing.', 7.99, 'Salads');

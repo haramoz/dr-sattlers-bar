@@ -37,6 +37,9 @@ public class WaiterController {
     private final String ORDER_RECEIVED = "order-received";
     private final String ORDER_DELIVERED = "order-delivered";
 
+    private final String TABLE_FREE_STATUS = "available";
+    private final String TABLE_NOT_FREE_STATUS = "occupied";
+
     @Autowired
     private TableRepository tableRepository;
 
@@ -108,12 +111,12 @@ public class WaiterController {
 
     @GetMapping("/findtable")
     public String findTable() {
-        List<Table> freeTables = tableRepository.findByStatus("available");
+        List<Table> freeTables = tableRepository.findByStatus(TABLE_FREE_STATUS);
         if (freeTables.isEmpty()) {
             return "Sorry, there are no free tables at the moment.";
         } else {
             Table table = freeTables.get(0);
-            table.setStatus("occupied");
+            table.setStatus(TABLE_NOT_FREE_STATUS);
             tableRepository.save(table);
             return "Your table number is " + table.getTableId();
         }

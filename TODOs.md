@@ -10,6 +10,9 @@
 11. Pagination for the getMenu
 12. Vault integration 
 13. Keycloak integration
+14. Place order functionality
+15. Check Order Status functionality
+16. Pay Bill functionality
 
 # In Progress
 1. Dockerize UI
@@ -31,6 +34,8 @@
 11. Integration with the backend and frontend (Get Menu)
 12. Database creation postgres
 13. Notification flow from kafka broker to react UI
+14. Integrate Find table functionality (Refer to README)
+
 
 
 
