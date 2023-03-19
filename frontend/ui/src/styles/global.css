@@ -34,6 +34,7 @@ body {
 .maiden {
   height: 450px;
   margin-top: 50px;
+  padding-left: 30px;
 }
 
 .sub-menu {
@@ -112,10 +113,18 @@ body {
   background-color: #1f5156 !important;
 }
 
-.h2findtable {
+.h2-findtable {
+  font-family: 'New Rocker' !important;
+  margin-top: 15% !important;
+}
+
+.h2-findtable-none {
   font-family: 'New Rocker' !important;
 }
 
+.img-findtable {
+  min-height: 2em;
+}
 /*
 
 .get-menu-modal {

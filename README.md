@@ -53,9 +53,9 @@ It is written in Java, REST APIs for taking order, serving food and initiating p
 - Get Menu: In this functionality the user can get the static menu from the database directly and display. If no database availble then show no menu to display. ui -> database
 
 - Find Table : This functionality can be triggered from the UI. Internally it creates a GET call via Waiter microservice to get a available table. Perhaps scope in the future for a "waiting system" using event driven table-got-free notification. 
-
-  UI -> GET call to waiter -> Database query.
-  After a table is taken UI-> POST method via waiter
+  UI -> GET call to waiter -> Database query. Provide the first available table.
+  (Future Improvement): Show a image and a available table, after choosing book that table. UI-> POST method via waiter
+  
 - Place Order : User or Waiter can place an order for a tableId. Both cases event driven implementation. Kafka topic published to kitchen -> order-recieved topic, paylod, tableid and items and quantity.
 - Order status : ui -> Kitchen microservice REST GET call based on table status. params Table ID, returns status of all the order based on database record. ui -> Kitchen -> Database
 - Pay Bill : REST POST call to go-payment microservice via Waiter microservice. If not available ask for cash :D ui -> Waiter -> payment-go -> database
