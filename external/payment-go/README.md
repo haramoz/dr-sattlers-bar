@@ -17,3 +17,22 @@ this would generated docs/docs.go, docs/swagger.json and docs/swagger.yaml
 
 Go to https://editor.swagger.io/
 paste the docs/swagger.yml to visualize the current api definitions, generated using swaggo, based on YOUR annotations of the API
+
+## Steps to run
+<pre>
+go build
+go run main.go 
+</pre>
+
+### Dockerize
+<pre>
+docker build -t payment-go-app .
+docker run -p 8085:8085 payment-go-app
+
+
+</pre>
+
+## Dev notes
+- curl http://localhost:8085/ping you can curl to a rest api to check if its running...
+- netstat -an | grep 8085 --> Tocheck if there is any socker listening to that port 8085 
+- Inside the main.go it was like this, router.Run("localhost:" + port) <-- Problem with localhost when you connect via docker> Was getting connection refused!

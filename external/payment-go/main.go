@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -41,7 +42,7 @@ var paymentsRecieved = []payment{
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host      localhost:8080
+// @host      localhost:8085
 func main() {
 	router := gin.Default()
 	router.GET("/bill/:tableid", getBill)
@@ -49,7 +50,12 @@ func main() {
 	router.POST("/newpayment", postProcessPayment)
 	router.POST("/newbill", postPrepareBill)
 
-	router.Run("localhost:8080")
+	port := os.Getenv("MY_APP_PORT")
+
+	if port == "" {
+		port = "8085"
+	}
+	router.Run(":" + port)
 }
 
 // getPayments godoc

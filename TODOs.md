@@ -1,6 +1,5 @@
 # Open tasks:
 
-1. Dockerize Payment-go
 2. Setup consumption of payment REST API by Waiter
 3. Test cases for Waiter
 6. CICD deployment (Docker + Jenkins?)
@@ -37,6 +36,8 @@
 12. Database creation postgres
 13. Notification flow from kafka broker to react UI
 14. Integrate Find table functionality (Refer to README)
+15. Dockerize Payment-go
+
 
 
 
