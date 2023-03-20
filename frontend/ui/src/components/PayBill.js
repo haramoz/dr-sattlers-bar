@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Form, Dropdown, Popup } from 'semantic-ui-react';
+import { Form, Dropdown, Message } from "semantic-ui-react";
 
 const options = [
-  { key: 'Cash', value: 'Cash', text: 'Cash' },
-  { key: 'Card', value: 'Card', text: 'Card' },
+  { key: "Cash", value: "Cash", text: "Cash" },
+  { key: "Card", value: "Card", text: "Card" },
 ];
 
 const PayBill = (props) => {
   const [paymentMethod, setPaymentMethod] = useState(options[0].value);
   const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
-  //const [message, setMessage] = useState('');
-  const [status, setStatus] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8085/bill/${props.tableID}`
+        );
+        setAmount(parseFloat(response.data.amount));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [props.tableID]);
 
   const handleDropdownChange = (event, data) => {
     setPaymentMethod(data.value);
@@ -25,32 +38,47 @@ const PayBill = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Selected option:', paymentMethod);
-    console.log('Float value:', amount);
+    console.log("Selected option:", paymentMethod);
+    console.log("Float value:", amount);
 
     const data = {
-        tableID: props.tableID,
-        paymentMethod: paymentMethod,
-        amount: amount
-      };
+      tableID: props.tableID,
+      paymentMethod: paymentMethod,
+      amount: amount,
+    };
 
-      try {
-        setLoading(true);
-        const response = await axios.post('http://localhost:8085/newpayment', data);
-        console.log('Server response:', response.data);
-        //setMessage(color:'green', message:'Payment successful!');
-        setStatus({ color: 'green', message: 'Payment successful!'});
-      } catch (error) {
-        //setMessage("Payment failed!");
-        setStatus({ color: 'red', message: "Payment failed!" });
-
-      } finally {
-        setLoading(false);
-      }
+    try {
+      setLoading(true);
+      setError(false);
+      setSuccess(false);
+      const response = await axios.post(
+        "http://localhost:8085/newpayment",
+        data
+      );
+      console.log("Server response:", response.data);
+      setLoading(false);
+      setSuccess(true);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
+      <Form.Field>
+        <label>Amount:</label>
+        <input
+          type="number"
+          step="0.5"
+          value={amount}
+          min={amount}
+          onChange={handleFloatChange}
+        />
+      </Form.Field>
       <Form.Field>
         <label>How would you like to pay?</label>
         <Dropdown
@@ -62,30 +90,17 @@ const PayBill = (props) => {
           onChange={handleDropdownChange}
         />
       </Form.Field>
-      <Form.Field>
-        <label>Amount:</label>
-        <input type="number" step="0.01" value={amount} onChange={handleFloatChange} />
-      </Form.Field>
-      <Form.Button>Pay</Form.Button>
 
-      {status && (
-        <Popup
-          content={status.message}
-          trigger={<div style={{ color: status.color }}>{status.message}</div>}
-          open
-          onClose={() => setStatus('')}
-          position="bottom center"
-          style={{ backgroundColor: 'transparent', boxShadow: 'none' }}
-          inverted
-          hideOnScroll
-          flowing
-          wide
-          basic
-          size="mini"
-          className={loading && 'shake'}
-        />
+      <Form.Button color="blue">Pay</Form.Button>
+
+      {loading && <Message content="Processing payment..." />}
+      {success && <Message positive content="Payment successful!" />}
+      {error && (
+        <Message negative>
+          <Message.Header>Payment failed!</Message.Header>
+          <p>Please try again later.</p>
+        </Message>
       )}
-
     </Form>
   );
 };
