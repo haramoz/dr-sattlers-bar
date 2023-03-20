@@ -28,11 +28,9 @@ go run main.go
 <pre>
 docker build -t payment-go-app .
 docker run -p 8085:8085 payment-go-app
-
-
 </pre>
 
 ## Dev notes
 - curl http://localhost:8085/ping you can curl to a rest api to check if its running...
 - netstat -an | grep 8085 --> Tocheck if there is any socker listening to that port 8085 
-- Inside the main.go it was like this, router.Run("localhost:" + port) <-- Problem with localhost when you connect via docker> Was getting connection refused!
+- Inside the main.go it was like this, router.Run("localhost:" + port) <-- Problem with 'localhost' when you connect via docker> Was getting connection refused!

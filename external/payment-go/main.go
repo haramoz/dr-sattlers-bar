@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -45,6 +46,19 @@ var paymentsRecieved = []payment{
 // @host      localhost:8085
 func main() {
 	router := gin.Default()
+
+	// Set up CORS middleware
+	config := cors.DefaultConfig()
+	originUrl := os.Getenv("REACT_APP_ORIGIN_URL")
+
+	if originUrl == "" {
+		originUrl = "http://localhost:3001"
+	}
+	config.AllowOrigins = []string{originUrl}
+	config.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Authorization"}
+
+	router.Use(cors.New(config))
+
 	router.GET("/bill/:tableid", getBill)
 	router.GET("/payments", getPayments)
 	router.POST("/newpayment", postProcessPayment)
