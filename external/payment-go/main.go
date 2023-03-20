@@ -101,7 +101,7 @@ func postProcessPayment(c *gin.Context) {
 	// Delete entry from bills slice
 	var billAmount = updateBill(newPayment.TableID, c)
 	if billAmount == 0 {
-		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "POST failed!"})
+		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Create a Bill First! Post failed."})
 		return
 	}
 
@@ -125,7 +125,7 @@ func updateBill(tableId string, c *gin.Context) float64 {
 		}
 	}
 
-	return 0
+	return 0 // Zero means no bills exists
 }
 
 // RemoveIndex godoc

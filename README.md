@@ -58,7 +58,15 @@ It is written in Java, REST APIs for taking order, serving food and initiating p
   
 - Place Order : User or Waiter can place an order for a tableId. Both cases event driven implementation. Kafka topic published to kitchen -> order-recieved topic, paylod, tableid and items and quantity.
 - Order status : ui -> Kitchen microservice REST GET call based on table status. params Table ID, returns status of all the order based on database record. ui -> Kitchen -> Database
-- Pay Bill : REST POST call to go-payment microservice via Waiter microservice. If not available ask for cash :D ui -> Waiter -> payment-go -> database
+- Pay Bill : REST POST call to go-payment microservice via Waiter microservice. If not available ask for cash :D ui -> payment-go -> database
+
+ First populate all the table ids in a dropdown
+  -Then user selects a tableId (where currently sitting)
+  -Based on the tableid the total bill is populated
+  -User proceeds to select payment method
+  -Add tip functionality (Future scope)
+  -Make Payment 
+  -Integrate Stripe.mock or paypal sandbox for processing the payment (Future scope) 
 
 TODO - Swagger API doc
 https://smartbear.com/news/news-releases/swaggerhub-now-supports-event-driven-asyncapi-spec/

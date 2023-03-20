@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import menu1 from "../../img/menu1.png";
 import ModalHeader from "./ModalHeaders.js"
+import GetTablesDropdown from "../SelectTable"
 
 function ModalMenu() {
     const [open, setOpen] = useState(false);
@@ -18,7 +19,8 @@ function ModalMenu() {
         >
             <ModalHeader/>
             <Modal.Content>
-                <p>Pay Bill goes here.</p>
+                <p>Please select your table to pay the Bill.</p>
+                <GetTablesDropdown/>
             </Modal.Content>
             <Modal.Actions>
                 <Button onClick={() => setOpen(false)}>Close</Button>
