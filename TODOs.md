@@ -9,7 +9,6 @@
 11. Pagination for the getMenu
 12. Vault integration 
 13. Keycloak integration
-15. Check Order Status functionality
 17. Link all the README files with main README.md
 
 # In Progress
@@ -17,9 +16,8 @@
 2. Redux-thunk usage
 3. Pipeline creation
 4. Separate business logic from Rest controller (scope: backend)
-14. Place order functionality
-16. Pay Bill functionality
-
+5. Place order functionality
+6. Check Order Status functionality
 
 # Finished
 1. Kafka producer config
@@ -37,6 +35,8 @@
 13. Notification flow from kafka broker to react UI
 14. Integrate Find table functionality (Refer to README)
 15. Dockerize Payment-go
+16. Pay Bill functionality
+
 
 
 
