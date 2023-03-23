@@ -52,4 +52,13 @@ public class KitchenController {
         return "Alcohol & Food & more alcohol";
     }
 
+    @GetMapping("/orderstatus")
+    public List<Order> orderStatus(
+            @RequestParam(value = "table", defaultValue = "1")
+            String tableId) {
+        LOG.info("Received GET request {} sending to kafka topic {}", "orderStatus", ORDER_DELIVERED);
+        //
+        return "Alcohol & Food & more alcohol";
+    }
+
 }
