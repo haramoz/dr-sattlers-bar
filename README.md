@@ -104,7 +104,4 @@ Oauth based spring security based APIs are a thing!
 - UI welcoming functionality and skeleton look and feel
 - Redesigned the frontend module to improve the design based on containerization needs
 
-## This is put on hold until further notice, for other goals! 
-
-
 
