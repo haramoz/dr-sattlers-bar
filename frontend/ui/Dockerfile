@@ -14,7 +14,7 @@ RUN npm i
 RUN npm run build
 
 # Set the environment variable
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 # Expose port 3001
 EXPOSE 3001

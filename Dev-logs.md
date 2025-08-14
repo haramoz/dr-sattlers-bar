@@ -57,3 +57,7 @@ While integrating the UI with Java and golang backend felt the neeed to create s
 - node-backend will have its own Dockerfile
 - ui will have its own Dockerfile
 - will eventually have to combine both in a docker-dompose file -> HELM? 
+
+14 Aug 2025
+-------------
+restarting this project. No particular motivation. Probably good experience with migration is possible. I am a kubernetes certified developer now, on my way to Lead consultant position.
