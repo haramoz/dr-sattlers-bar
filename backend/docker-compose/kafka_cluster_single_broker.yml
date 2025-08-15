@@ -1,49 +1,25 @@
-version: '3.3'
 services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:${KAFKA_VERSION:-latest}
-    hostname: zookeeper
-    ports:
-      - "2181:2181"
+  kafka:
+    image: confluentinc/cp-kafka:7.5.3
+    container_name: kafka-1
     environment:
-      ZOOKEEPER_SERVER_ID: 1
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-      ZOOKEEPER_INIT_LIMIT: 5
-      ZOOKEEPER_SYNC_LIMIT: 2
-      ZOOKEEPER_SERVERS: zookeeper:2888:3888
-    networks:
-      - ${GLOBAL_NETWORK:-kafka}
-  schema-registry:
-    image: confluentinc/cp-schema-registry:${KAFKA_VERSION}
-    hostname: schema-registry
-    depends_on:
-      - zookeeper
-      - kafka-broker-1
-      #- kafka-broker-2
-      #- kafka-broker-3
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_NODE_ID: "1"
+      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:29093"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka-1:9092"   # or your host/ip
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka-1:29093"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
+      KAFKA_LOG_DIRS: "/var/lib/kafka/data"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
+      KAFKA_CLUSTER_ID: "${KAFKA_CLUSTER_ID}"
+      CLUSTER_ID: "${KAFKA_CLUSTER_ID}"
     ports:
-      - "8081:8081"
-    environment:
-      SCHEMA_REGISTRY_HOST_NAME: schema-registry
-      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
-      SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
-      SCHEMA_REGISTRY_DEBUG: 'true'
-    networks:
-      - ${GLOBAL_NETWORK:-kafka}
-  kafka-broker-1:
-    image: confluentinc/cp-kafka:${KAFKA_VERSION}
-    hostname: kafka-broker-1
-    ports:
-      - "19092:19092"
-    depends_on:
-      - zookeeper
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-1:9092,LISTENER_LOCAL://localhost:19092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,LISTENER_LOCAL:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_COMPRESSION_TYPE: producer
-    networks:
-      - ${GLOBAL_NETWORK:-kafka}
+      - "9092:9092"
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+
+volumes:
+  kafka_data: {}
