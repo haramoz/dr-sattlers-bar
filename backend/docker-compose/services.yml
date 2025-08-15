@@ -1,62 +1,120 @@
-version: '3.3'
+version: "3.9"
+
 services:
   waiter-service:
-    image: ${GROUP_ID}/employee.waiter:${SERVICE_VERSION:-latest}
+    image: com.dr.sattlers.bar/employee.waiter:0.0.1-SNAPSHOT
+    container_name: waiter-service
     ports:
       - "8888:8080"
     volumes:
-      - "./docker-logs:/workspace/waiter-service/logs"
+      - "../docker-logs:/workspace/waiter-service/logs"
     depends_on:
       - kafka-broker-1
-      - kafka-broker-2
-      - kafka-broker-3
+      - schema-registry
+      - postgres
     environment:
-      #- "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8080 -Xms128m -Xmx256m"
-      - "LOGGING_LEVEL_COM_MICROSERVICES_DEMO=info"
-      - "LOGGING_LEVEL_ROOT=info"
-      - "KAFKA-CONFIG_TOPIC-NAME=order-delivered"
-      - "KAFKA-CONFIG_TOPIC-NAMES-TO-CREATE_0=order-delivered"
-      - "KAFKA-CONFIG_TOPIC-NAMES-TO-CREATE_1=order-received"
-      - "KAFKA-CONFIG_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
-      - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
+      LOGGING_LEVEL_COM_MICROSERVICES_DEMO: info
+      LOGGING_LEVEL_ROOT: info
+      KAFKA-CONFIG_TOPIC-NAME: order-delivered
+      KAFKA-CONFIG_TOPIC-NAMES-TO-CREATE_0: order-delivered
+      KAFKA-CONFIG_TOPIC-NAMES-TO-CREATE_1: order-received
+      KAFKA-CONFIG_BOOTSTRAP-SERVERS: kafka-broker-1:9092
+      KAFKA-CONFIG_SCHEMA-REGISTRY-URL: http://schema-registry:8081
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
     networks:
-      - ${GLOBAL_NETWORK:-services}
+      - appnet
+
   kitchen-service:
-    image: ${GROUP_ID}/employee.kitchen:${SERVICE_VERSION:-latest}
+    image: com.dr.sattlers.bar/employee.kitchen:0.0.1-SNAPSHOT
+    container_name: kitchen-service
     ports:
       - "8890:8082"
     volumes:
-      - "./docker-logs:/workspace/kitchen-service/logs"
+      - "../docker-logs:/workspace/kitchen-service/logs"
     depends_on:
       - kafka-broker-1
-      - kafka-broker-2
-      - kafka-broker-3
+      - schema-registry
+      - postgres
     environment:
-      #- "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8080 -Xms128m -Xmx256m"
-      - "LOGGING_LEVEL_COM_MICROSERVICES_DEMO=info"
-      - "LOGGING_LEVEL_ROOT=info"
-      - "KAFKA-CONFIG_TOPIC-NAME=order-received"
-      - "KAFKA-CONFIG_TOPIC-NAMES-TO-CREATE_0=order-received"
-      - "KAFKA-CONFIG_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
-      - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
+      LOGGING_LEVEL_COM_MICROSERVICES_DEMO: info
+      LOGGING_LEVEL_ROOT: info
+      KAFKA-CONFIG_TOPIC-NAME: order-received
+      KAFKA-CONFIG_TOPIC-NAMES-TO-CREATE_0: order-received
+      KAFKA-CONFIG_BOOTSTRAP-SERVERS: kafka-broker-1:9092
+      KAFKA-CONFIG_SCHEMA-REGISTRY-URL: http://schema-registry:8081
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
     networks:
-      - ${GLOBAL_NETWORK:-services}
+      - appnet
+
   postgres:
     image: postgres:10.5
+    container_name: postgres
     restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=mydb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
     logging:
       options:
         max-size: 10m
         max-file: "3"
     ports:
-      - '5438:5432'
+      - "5438:5432"
     volumes:
       - ~/Documents/dr-sattlers-bar-data/postgres-data:/var/lib/postgresql/data
-      #copy the sql script to create tables
       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-      # copy the sql script to fill tables
-      #- ./sql/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+    networks:
+      - appnet
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:${KAFKA_VERSION:-latest}
+    container_name: zookeeper
+    hostname: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - appnet
+
+  kafka-broker-1:
+    image: confluentinc/cp-kafka:${KAFKA_VERSION:-latest}
+    container_name: kafka-broker-1
+    hostname: kafka-broker-1
+    ports:
+      - "19092:19092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-1:9092,LISTENER_LOCAL://localhost:19092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,LISTENER_LOCAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+    networks:
+      - appnet
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:${KAFKA_VERSION:-latest}
+    container_name: schema-registry
+    hostname: schema-registry
+    ports:
+      - "8081:8081"
+    depends_on:
+      - zookeeper
+      - kafka-broker-1
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
+      SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
+    networks:
+      - appnet
+
+networks:
+  appnet:
+    driver: bridge
